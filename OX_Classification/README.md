@@ -1,3 +1,6 @@
+# [O_X 분류기를 이용해 직접 그림을 그려 분류하기](https://github.com/ssssihoon/IMS_Lab/blob/main/OX_Classification/OX_Drawing/OX_Drawing.ipynb)
+
+
 ## <O_X 클래스 분류>
 
 OX 그림을 직접그려 O와 X를 분류하는 CNN모델 만들기 및 CAM으로 가중치 분석
