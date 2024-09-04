@@ -1,0 +1,10 @@
+- # 랜드마크 좌표 추출 및 데이터 수집
+- ## 코드
+	- [data_correct.py](../assets/data_correct_1725287329226_0.py)
+- ## 데이터 수집 csv
+	- [head_direction_test.csv](../assets/head_direction_test_1725287380325_0.csv)
+		- #### 머리 방향 결과를 예측 할 시 참고 할 것
+		- [head_direction_test_define.txt](../assets/head_direction_test_define_1725287474381_0.txt)
+-
+-
+-
