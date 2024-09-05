@@ -1,0 +1,13 @@
+- # 머리 방향 분류를 위한 데이터 수집(상하좌우)
+	- 머리 방향 분류를 위해 양쪽 동공, 코, 턱 의 좌표를 space bar 키를 누를 때마다 수집이 되게 구현 - 4방향(상하좌우)로 분류를 하게끔
+- ## 코드
+	- [data_correct_option_spacebar.py](../assets/data_correct_option_spacebar_1725423947998_0.py)
+- ## 데이터 수집 csv
+	- [results_up.csv](../assets/results_up_1725423968470_0.csv)
+	- [results_down.csv](../assets/results_down_1725423975619_0.csv)
+	- [results_left.csv](../assets/results_left_1725423979527_0.csv)
+	- [results_right.csv](../assets/results_right_1725423984346_0.csv)
+-
+- 예정 :
+	- 측정 문제를 보완 - 외부 웹캠 사용과 측정 방식을 정규화, 웹캠과 화면의 각도 및 거리를 제한
+	- 4개의 상하좌우 각각의 1000개 데이터를 수집 예정
