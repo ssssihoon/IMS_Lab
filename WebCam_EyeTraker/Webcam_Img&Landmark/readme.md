@@ -4,5 +4,6 @@
 	- 시작점 : (60, 40), 간격 : (225, 250)
 	- 사람당 45x300 (45개의 점 * 300 세션)
 	- CNN을 이용해 양 쪽 두 동공을 이용하며, MLP로 랜드마크 점과 결합해 결과 도출
+ - resnet모델을 사용 예정이다.
 ![image](https://github.com/user-attachments/assets/e224e152-f6e5-40af-8705-ebb99a3e4216)
 
