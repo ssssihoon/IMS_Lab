@@ -2,6 +2,7 @@ import cv2
 import csv
 import mediapipe as mp
 import numpy as np
+import time
 
 relative = lambda landmark, shape: (int(landmark.x * shape[1]), int(landmark.y * shape[0]))
 
@@ -104,16 +105,43 @@ with mp_face_mesh.FaceMesh(
                     left_pupil, right_pupil, nose_tip, chin, left_mouth_corner, right_mouth_corner, left_eye_outer, right_eye_outer = gaze(
                         image, landmarks)
 
-                    # 스페이스바를 눌러 캡처
-                    if cv2.waitKey(1) & 0xFF == ord(' '):
-                        for f in range(max_images_per_point):
-                            frame_filename = f'test/img_{session_count}_{point_idx:02d}_frame_{f+1:02d}.jpg'
-                            log_gaze_to_csv(session_count, point_idx, f+1, left_pupil, right_pupil, nose_tip, chin,
+                # 스페이스바가 눌리면 촬영 시작
+                if cv2.waitKey(1) & 0xFF == ord(' '):
+                    print(f"Started capturing 30 frames for session {session_count}, point {point_idx}")
+                    start_time = time.time()  # 촬영 시작 시간 기록
+
+                    for frame_num in range(1, max_images_per_point + 1):
+                        success, image = cap.read()
+                        if not success:
+                            continue
+
+                        image.flags.writeable = False
+                        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                        results = face_mesh.process(image)
+                        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+
+                        if results.multi_face_landmarks:
+                            landmarks = results.multi_face_landmarks[0]
+                            left_pupil, right_pupil, nose_tip, chin, left_mouth_corner, right_mouth_corner, left_eye_outer, right_eye_outer = gaze(
+                                image, landmarks)
+
+                            # 이미지 저장
+                            frame_filename = f'test/img_{session_count}_({point_idx})_frame_{frame_num}.jpg'
+                            log_gaze_to_csv(session_count, point_idx, frame_num, left_pupil, right_pupil, nose_tip,
+                                            chin,
                                             left_mouth_corner, right_mouth_corner, left_eye_outer, right_eye_outer)
                             cv2.imwrite(frame_filename, image)
-                            print(f"Captured frame {f+1} for point {point_idx} in session {session_count}: {frame_filename}")
-                        frame_num += 1
-                        break
+                            print(
+                                f"Captured frame {frame_num} for point {point_idx} in session {session_count}: {frame_filename}")
+
+                        # 초당 30프레임을 유지하기 위한 시간 조정
+                        elapsed_time = time.time() - start_time
+                        delay = frame_num / 30 - elapsed_time  # 다음 프레임까지 남은 시간 계산
+                        if delay > 0:
+                            time.sleep(delay)
+
+                    # 30프레임 촬영 후 종료
+                    break
 
                 # ESC 키로 종료
                 if cv2.waitKey(1) & 0xFF == 27:
