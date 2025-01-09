@@ -1,0 +1,5 @@
+- # UNet&NotLandmark
+- 랜드마크 없이 9클래스 분류를 진행
+- 결과로 학습자체가 되지 않았다.
+- ### 코드
+	- [1127_UNet&notLandmark.ipynb](../assets/1127_UNet&notLandmark_1735267107075_0.ipynb)
